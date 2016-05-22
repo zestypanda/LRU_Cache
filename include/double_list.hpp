@@ -43,8 +43,10 @@ public:
           head = head->next;
           head->prev = NULL;
        }
-       else 
+       else { 
           tail = NULL;
+          head = NULL;
+       }
        --size;
     }
   }
@@ -55,8 +57,10 @@ public:
           tail = tail->prev;
           tail->next = NULL;
        }
-       else
+       else {
+          tail = NULL;
           head = NULL;
+       }
        --size;
     }
   }
