@@ -1,19 +1,21 @@
-#ifndef SRC_DOUBLE_LIST_CPP_
-#define SRC_DOUBLE_LIST_CPP_
+#ifndef INCLUDE_DOUBLE_LIST_HPP_
+#define INCLUDE_DOUBLE_LIST_HPP_
 
 #include <iostream>
 
 namespace LRU {
-
-struct ListNode {
-  int val;  
-  ListNode* prev;
-  ListNode* next;
-  ListNode(int x): val(x), prev(NULL), next(NULL) {}
-};
-
 class DoubleList{
 public:
+  struct ListNode {  
+    int key;
+    int val;
+    ListNode* prev;
+    ListNode* next;
+    ListNode(int key, int value): 
+       key(key), val(value), prev(NULL), next(NULL) 
+    {}
+  };
+
   DoubleList(): size(0), head(NULL), tail(NULL)
   {}
   ~DoubleList() {
@@ -23,8 +25,8 @@ public:
       delete current;
     } 
   }
-  void push_front(int x){
-    ListNode *node = new ListNode(x);
+  void push_front(int key, int value){
+    ListNode *node = new ListNode(key, value);
     if (head == NULL){
       head = node;
       tail = node;
@@ -79,13 +81,14 @@ public:
        node->next->prev = node->prev;
        --size;       
     }
+    delete node;
   }
 
   void printForward(){
     ListNode* tmp = head;
     std::cout << "print forward: ";
     while (tmp != NULL) {
-      std::cout << tmp->val << "->";
+      std::cout << '(' << tmp->key << ',' << tmp->val << ")->";
       tmp = tmp->next;
     }
     std::cout << '\n';
@@ -95,10 +98,10 @@ public:
     ListNode* tmp = tail;
     std::cout << "print backward: ";
     while (tmp != NULL){ 
-      std::cout << tmp->val << "<-";
+      std::cout << '(' << tmp->key << ',' << tmp->val << ")<-";
       tmp = tmp->prev;
     }
-    std::cout << '\n';
+    std::cout << std::endl;
   }
 
 //private:
@@ -108,4 +111,4 @@ public:
 };
 
 }
-#endif // SRC_DOUBLE_LIST_CPP_
+#endif // INCLUDE_DOUBLE_LIST_HPP_
