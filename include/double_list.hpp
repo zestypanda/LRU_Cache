@@ -4,14 +4,17 @@
 #include <iostream>
 
 namespace LRU {
+template<typename T, typename S>
 class DoubleList{
 public:
-  struct ListNode {  
-    int key;
-    int val;
-    ListNode* prev;
-    ListNode* next;
-    ListNode(int key, int value): 
+  template <typename P, typename Q>
+  class ListNode {
+  public: 
+    P key;
+    Q val;
+    ListNode<P, Q>* prev;
+    ListNode<P, Q>* next;
+    ListNode(P key, Q value): 
        key(key), val(value), prev(NULL), next(NULL) 
     {}
   };
@@ -20,13 +23,13 @@ public:
   {}
   ~DoubleList() {
     while (head != NULL) {
-      ListNode *current = head;
+      ListNode<T, S> *current = head;
       head = head->next;
       delete current;
     } 
   }
-  void push_front(int key, int value){
-    ListNode *node = new ListNode(key, value);
+  void push_front(T key, S value){
+    ListNode<T, S> *node = new ListNode<T, S>(key, value);
     if (head == NULL){
       head = node;
       tail = node;
@@ -71,7 +74,7 @@ public:
     return size == 0;
   }
 
-  void remove(ListNode* node){
+  void remove(ListNode<T, S>* node){
     if (node == head)
        pop_front();
     else if (node == tail)
@@ -85,7 +88,7 @@ public:
   }
 
   void printForward(){
-    ListNode* tmp = head;
+    ListNode<T, S>* tmp = head;
     std::cout << "print forward: ";
     while (tmp != NULL) {
       std::cout << '(' << tmp->key << ',' << tmp->val << ")->";
@@ -95,7 +98,7 @@ public:
   }
 
   void printBackward(){
-    ListNode* tmp = tail;
+    ListNode<T, S>* tmp = tail;
     std::cout << "print backward: ";
     while (tmp != NULL){ 
       std::cout << '(' << tmp->key << ',' << tmp->val << ")<-";
@@ -106,8 +109,8 @@ public:
 
 //private:
   int size;
-  ListNode* head;
-  ListNode* tail; 
+  ListNode<T, S>* head;
+  ListNode<T, S>* tail; 
 };
 
 }

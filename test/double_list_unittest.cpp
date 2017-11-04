@@ -1,22 +1,22 @@
-#include "include/double_list.hpp"
+#include "../include/double_list.hpp"
 #include "gtest/gtest.h"
 
 using ::testing::InitGoogleTest;
 
 TEST(DoubleListTest, ConstructorTest){
-  LRU::DoubleList dlist;
+  LRU::DoubleList<int, int> dlist;
   EXPECT_EQ(0, dlist.size);
   ASSERT_EQ(NULL, dlist.head);
   ASSERT_EQ(NULL, dlist.tail);
 }
 
 TEST(DoubleListTest, PushfrontTest){
-  LRU::DoubleList dlist;
+  LRU::DoubleList<int, int> dlist;
   for (int i = 0; i < 5; ++i) 
     dlist.push_front(i,i);
   EXPECT_EQ(5, dlist.size);
-  LRU::DoubleList::ListNode *head = dlist.head;
-  LRU::DoubleList::ListNode *tail = dlist.tail;
+  LRU::DoubleList<int, int>::ListNode<int, int> *head = dlist.head;
+  LRU::DoubleList<int, int>::ListNode<int, int> *tail = dlist.tail;
   for (int i = 1; i < 5; ++i){
     head = head->next;
     tail = tail->prev;  
@@ -30,7 +30,7 @@ TEST(DoubleListTest, PushfrontTest){
 }
 
 TEST(DoubleListTest, PushPopTest){
-  LRU::DoubleList dlist;
+  LRU::DoubleList<int, int> dlist;
   for (int i = 0; i < 5; ++i) 
     dlist.push_front(i,i);
   EXPECT_EQ(5, dlist.size);
@@ -73,10 +73,10 @@ TEST(DoubleListTest, PushPopTest){
 }
 
 TEST(DoubleListTest, RemoveTest){
-  LRU::DoubleList dlist;
+  LRU::DoubleList<int, int> dlist;
   for (int i = 0; i < 5; ++i) 
     dlist.push_front(i,i);
-  LRU::DoubleList::ListNode *node = dlist.head;
+  LRU::DoubleList<int, int>::ListNode<int, int> *node = dlist.head;
   dlist.remove(node);
   ASSERT_EQ(3, dlist.head->val);
   ASSERT_EQ(3, dlist.head->key);
