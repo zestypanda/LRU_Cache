@@ -1,7 +1,5 @@
 # LRU_Cache
-Implement LRU (Least Recently Used) Cache Class Template in C++ 
-   
-And Perform Unit Test using Google Test
+Implement LRU (Least Recently Used) Cache Class Template in C++ and Perform Unit Test using Google Test
 
 using double linked list and unordered_map; 
 
